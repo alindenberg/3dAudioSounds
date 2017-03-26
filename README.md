@@ -5,3 +5,8 @@
 1) ReactJs Docs: https://facebook.github.io/react/docs/installation.html
 2) Web-Audio Api: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 3) (AWESOME) Web Audio Html5 tutorial: https://www.html5rocks.com/en/tutorials/webaudio/intro/
+
+## Installation & Running:
+	1) Install node package manager if not installed already. (Download from nodejs.org)
+	2) run `npm install` in the 3dAudio folder to install project dependencies
+	3) Run with `npm start` and navigate to http://localhost:3000
