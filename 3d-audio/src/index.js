@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import E220 from './E220';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <E220 />,
   document.getElementById('root')
 );
