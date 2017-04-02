@@ -5,13 +5,6 @@ import './E220.css';
 window.load = windowLoad();
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-
-// Coordinates
-var rightCoords = {};
-rightCoords.x = (3*Math.pow(10,38));
-rightCoords.y = (3*Math.pow(10,38));
-rightCoords.z = (3*Math.pow(10,38));
-
 var audioBuffer = null;
 var context = new AudioContext();
 var sound = {};
@@ -70,12 +63,12 @@ function error() {
   console.log("Error decoding data");
 }
 
-function playSound() {
+function playSound(x, y, z) {
   sound.source = context.createBufferSource();
   sound.source.buffer = audioBuffer;                    // tell the source which sound to play
   sound.source.connect(sound.volume);       // connect the source to the context's destination (the speakers)
-  sound.panner.setPosition(rightCoords.x, 0, 0);
-  context.listener.setPosition(rightCoords.x, 0, 0);
+  sound.panner.setPosition(x, y, z);
+  context.listener.setPosition(0, 0, 0);
   sound.source.start(0);                           // play the source now
 }
 
@@ -94,10 +87,13 @@ class E220 extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          <button onClick={playSound}>Start</button>
+        <div className="App-intro">
+          <button id="frontButton" onClick={()=>playSound(0,0,5)}>Front</button>
+          <button id="rightButton" onClick={()=>playSound(10,0,0)}>Right</button>
+          <button id="leftButton" onClick={()=>playSound(-10,0,0)}>Left</button>
+          <button id="backButton" onClick={()=>playSound(0,0,-10)}>Back</button>
           <button onClick={stopSound}>Stop</button>
-        </p>
+        </div>
       </div>
     );
   }
