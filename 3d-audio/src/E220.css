@@ -22,3 +22,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#frontButton {
+  padding-top: 0%;
+}
+
+#rightButton {
+  /*padding-right: 5%;*/
+}
+
+#leftButton {
+  /*padding-left: 5%;*/
+}
+
+#backButton {
+  /*padding-top: 5%;*/
+}
