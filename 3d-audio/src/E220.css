@@ -1,40 +1,77 @@
-.App {
+.E220 {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.rc-slider {
+  margin-left: 5%;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+#classroom {
+  text-align: center;
+  height:100vh;
+  width:60vw;
+  border: 5px solid;
 }
 
-.App-intro {
-  font-size: large;
+#teacherDiv {
+  width:100%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* ------- Row CSS ------- */
+
+#firstRow {
+  padding-top:5%;
+  padding-bottom: 2%;
 }
 
-#frontButton {
-  padding-top: 0%;
+#secondRow {
+  padding-bottom: 2%;
 }
 
-#rightButton {
-  /*padding-right: 5%;*/
+#thirdRow {
+  padding-bottom: 2%;
 }
 
-#leftButton {
-  /*padding-left: 5%;*/
+#fourthRow {
+  padding-bottom: 2%;
 }
 
-#backButton {
-  /*padding-top: 5%;*/
+#fifthRow {
+  padding-bottom: 2%;
+}
+
+/* ------ Seat CSS ------- */
+
+#sixthRow {
+  padding-bottom: 2%;
+}
+
+#firstSeat {
+  height: 60px;
+  width: 60px;
+  /*margin-left: 15%;*/
+}
+
+#secondSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#thirdSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#fourthSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#fifthSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
 }
