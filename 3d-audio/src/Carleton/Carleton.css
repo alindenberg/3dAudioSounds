@@ -1,0 +1,85 @@
+/* ------- Row CSS ------- */
+
+#carletonFirstRow {
+  padding-top:2%;
+  padding-bottom: 2%;
+}
+
+#carletonSecondRow {
+  padding-bottom: 2%;
+}
+
+#carletonThirdRow {
+  padding-bottom: 2%;
+}
+
+#carletonFourthRow {
+  padding-bottom: 2%;
+}
+
+#carletonFifthRow {
+  padding-bottom: 2%;
+}
+
+#carletonSixthRow {
+  padding-bottom: 2%;
+}
+
+/* ------ Seat CSS ------- */
+
+#sixthRow {
+  padding-bottom: 2%;
+}
+
+#carletonFirstSeat {
+  height: 40px;
+  width: 40px;
+}
+
+#carletonSecondSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonThirdSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonFourthSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonFifthSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonSixthSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonSeventhSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonEighthSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}
+
+#carletonNinthSeat {
+  height: 40px;
+  width: 40px;
+  margin-left: 1%;
+}

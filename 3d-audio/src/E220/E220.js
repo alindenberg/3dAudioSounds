@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import './E220.css';
 
@@ -73,24 +72,13 @@ function playSound(x, y, z) {
   sound.source.start(0);                           // play the source now
 }
 
-// function stopSound() {
-//   if(sound.source) {
-//     sound.source.stop(0);
-//   }
-// }
-
 class E220 extends Component {
 
   render() {
     return (
-        <div id="classroom">
-          <h1><u>E220</u></h1>
-          <div id="teacherDiv">
-            <Slider defaultValue="55" id="teacherPosition"></Slider>
-            <h3>Professor Position</h3>
-          </div>
+        <div id="E220">
           <div id="firstRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>01</button>
+            <button id="firstSeat" onClick={()=>this.props.onSeatSelection(event)}>01</button>
             <button id="secondSeat" onClick={()=>playSound(0,0,5)}>02</button>
             <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>03</button>
             <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>04</button>
