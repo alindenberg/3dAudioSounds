@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Carleton from './Carleton/Carleton';
-import Classroom from './Classroom/Classroom';
+import SoundPanel from './SoundPanel/SoundPanel';
 import E220 from './E220/E220';
 import './index.css';
 
@@ -11,7 +11,7 @@ function onSeatSelection(event) {
 
 ReactDOM.render(
     <div id = "wrapper">
-		<Classroom />
+		<SoundPanel />
     </div>,
   	document.getElementById('root')
 );

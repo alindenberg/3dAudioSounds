@@ -78,46 +78,46 @@ class E220 extends Component {
     return (
         <div id="E220">
           <div id="firstRow">
-            <button id="firstSeat" onClick={()=>this.props.onSeatSelection(event)}>01</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>02</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>03</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>04</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>05</button>
+            <button id="firstSeat" value={[1, 10, 50, 260]} onClick={this.props.onClick}>01</button>
+            <button id="secondSeat" value={[2, 10, 50, 260]} onClick={this.props.onClick}>02</button>
+            <button id="thirdSeat" value={[3, 10, 50, 260]} onClick={this.props.onClick}>03</button>
+            <button id="fourthSeat" value={[4, 10, 50, 260]} onClick={this.props.onClick}>04</button>
+            <button id="fifthSeat" value={[5, 10, 50, 260]} onClick={this.props.onClick}>05</button>
           </div>
           <div id="secondRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>06</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>07</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>08</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>09</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>10</button>
+            <button id="firstSeat" value={[6, 10, 50, 260]} onClick={this.props.onClick}>06</button>
+            <button id="secondSeat" value={[7, 10, 50, 260]} onClick={this.props.onClick}>07</button>
+            <button id="thirdSeat" value={[8, 10, 50, 260]} onClick={this.props.onClick}>08</button>
+            <button id="fourthSeat" value={[9, 10, 50, 260]} onClick={this.props.onClick}>09</button>
+            <button id="fifthSeat" value={[10, 10, 50, 260]} onClick={this.props.onClick}>10</button>
           </div>
           <div id="thirdRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>11</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>12</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>13</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>14</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>15</button>
+            <button id="firstSeat" value={[11, 10, 50, 260]} onClick={this.props.onClick}>11</button>
+            <button id="secondSeat" value={[12, 10, 50, 260]} onClick={this.props.onClick}>12</button>
+            <button id="thirdSeat" value={[13, 10, 50, 260]} onClick={this.props.onClick}>13</button>
+            <button id="fourthSeat" value={[14, 10, 50, 260]} onClick={this.props.onClick}>14</button>
+            <button id="fifthSeat" value={[15, 10, 50, 260]} onClick={this.props.onClick}>15</button>
           </div>
           <div id="fourthRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>16</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>17</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>18</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>19</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>20</button>
+            <button id="firstSeat" value={[16, 10, 50, 260, ]} onClick={this.props.onClick}>16</button>
+            <button id="secondSeat" value={[17, 10, 50, 260]} onClick={this.props.onClick}>17</button>
+            <button id="thirdSeat" value={[18, 10, 50, 260]} onClick={this.props.onClick}>18</button>
+            <button id="fourthSeat" value={[19, 10, 50, 260]} onClick={this.props.onClick}>19</button>
+            <button id="fifthSeat" value={[20, 10, 50, 260]} onClick={this.props.onClick}>20</button>
           </div>
           <div id="fifthRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>21</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>22</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>23</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>24</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>25</button>
+            <button id="firstSeat" value={[21, 10, 50, 260]} onClick={this.props.onClick}>21</button>
+            <button id="secondSeat" value={[22, 10, 50, 260]} onClick={this.props.onClick}>22</button>
+            <button id="thirdSeat" value={[23, 10, 50, 260]} onClick={this.props.onClick}>23</button>
+            <button id="fourthSeat" value={[24, 10, 50, 260]} onClick={this.props.onClick}>24</button>
+            <button id="fifthSeat" value={[25, 10, 50, 260]} onClick={this.props.onClick}>25</button>
           </div>
           <div id="sixthRow">
-            <button id="firstSeat" onClick={()=>playSound(0,0,5)}>26</button>
-            <button id="secondSeat" onClick={()=>playSound(0,0,5)}>27</button>
-            <button id="thirdSeat" onClick={()=>playSound(0,0,5)}>28</button>
-            <button id="fourthSeat" onClick={()=>playSound(0,0,5)}>29</button>
-            <button id="fifthSeat" onClick={()=>playSound(0,0,5)}>30</button>
+            <button id="firstSeat" value={[26, 10, 50, 260]} onClick={this.props.onClick}>26</button>
+            <button id="secondSeat" value={[27, 10, 50, 260]} onClick={this.props.onClick}>27</button>
+            <button id="thirdSeat" value={[28, 10, 50, 260]} onClick={this.props.onClick}>28</button>
+            <button id="fourthSeat" value={[29, 10, 50, 260]} onClick={this.props.onClick}>29</button>
+            <button id="fifthSeat" value={[30, 50, 260]} onClick={this.props.onClick}>30</button>
           </div>
         </div>
     );
