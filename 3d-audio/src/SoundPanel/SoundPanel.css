@@ -1,0 +1,67 @@
+#configurables {
+	padding-top: 2%;
+}
+
+#soundPanel {
+	width:30vw;
+	height:100vh;
+	float:right;
+}
+
+#classroom {
+	width:68vw;
+	text-align: center;
+	height:90vh;
+	float: left;
+	border: 3px solid black;
+}
+
+#seatNum{
+	padding-bottom: 5%;
+	color: red;
+}
+
+#navbar {
+	padding-top: 1%;
+	height:5%;
+	padding-bottom: 1%;
+	width:100vw;
+	float:left;
+	border: 3px solid black;
+}
+
+#teacherDiv {
+	padding-top: 2%;
+}
+
+#playButton {
+	font-size: 30px;
+	font-style: bold;
+	background-color: blue;
+	color: white;
+	margin: 0 auto;
+}
+#stopButtonButton {
+	font-size: 30px;
+	font-style: bold;
+	background-color: blue;
+	margin-top: 10%;
+	color: white;
+	margin: 0 auto;
+}
+
+#playSound {
+	width: 100%;
+	text-align: center;
+}
+
+span {
+	font-size: 30px;
+}
+
+select {
+	height: 50%;
+	color: white;
+	font: 30px bold;
+	background-color: blue;
+}

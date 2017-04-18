@@ -1,0 +1,59 @@
+
+/* ------- Row CSS ------- */
+
+#firstRow {
+  padding-top:2%;
+  padding-bottom: 2%;
+}
+
+#secondRow {
+  padding-bottom: 2%;
+}
+
+#thirdRow {
+  padding-bottom: 2%;
+}
+
+#fourthRow {
+  padding-bottom: 2%;
+}
+
+#fifthRow {
+  padding-bottom: 2%;
+}
+
+/* ------ Seat CSS ------- */
+
+#sixthRow {
+  padding-bottom: 2%;
+}
+
+#firstSeat {
+  height: 60px;
+  width: 60px;
+  /*margin-left: 15%;*/
+}
+
+#secondSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#thirdSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#fourthSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
+
+#fifthSeat {
+  height: 60px;
+  width: 60px;
+  margin-left: 5%;
+}
