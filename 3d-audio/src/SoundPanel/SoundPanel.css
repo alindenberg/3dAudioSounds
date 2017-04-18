@@ -16,6 +16,11 @@
 	border: 3px solid black;
 }
 
+#seatNum{
+	padding-bottom: 5%;
+	color: red;
+}
+
 #navbar {
 	padding-top: 1%;
 	height:5%;

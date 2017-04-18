@@ -200,6 +200,7 @@ class SoundPanel extends Component {
 			professorLocation: 0,
 			constructionSound: false,
 			crowdNoise: false,
+			chalkboardNoise: false,
 			airConditioningOn: false,
 			nearbyChatter: false,
 			seatX: 0,
@@ -231,14 +232,26 @@ class SoundPanel extends Component {
 					<h1><u>SoundPanel</u></h1>
 					<ul id="configurables">
 						<li>
-							<h3>Seat No: {this.state.seatNumber}</h3>
+							<h3 id="seatNum"><i>Seat No: {this.state.seatNumber}</i></h3>
 						</li>
 						<li>
 							<h3>Professor Talking</h3>
-							<ToggleButton disabled={this.state.dropdownValue === "E220"}
+							<ToggleButton
 								value={ this.state.professorTalking || false } onToggle={
 									(value) => {
 								    	this.setState({professorTalking: !value,});
+								  	}
+							 	}
+							ToggleButton/>
+						</li>
+						<li>
+							<h3>Chalkboard Writing</h3>
+							<ToggleButton 
+								value={ this.state.chalkboardNoise || false } onToggle={
+									(value) => {
+										if(this.state.dropdownValue !== "Carleton") {
+								    		this.setState({chalkboardNoise: !value,});
+								    	}
 								  	}
 							 	}
 							ToggleButton/>
@@ -272,10 +285,6 @@ class SoundPanel extends Component {
 								  	}
 							 	}
 							ToggleButton/>
-						</li>
-						<li>
-							<h3>Volume</h3>
-							<Slider defaultValue='50' id='volumeSlider'></Slider>
 						</li>
 					</ul>
 					<div id="playSound">
