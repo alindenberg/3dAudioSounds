@@ -19,7 +19,7 @@ class E220 extends Component {
             <button id="secondSeat" value={[7, 35, 0, -10]} onClick={this.props.onClick}>07</button>
             <button id="thirdSeat" value={[8, 55, 0, -10]} onClick={this.props.onClick}>08</button>
             <button id="fourthSeat" value={[9, 70, 0, -10]} onClick={this.props.onClick}>09</button>
-            <button id="fifthSeat" value={[10, 85, 0, -10]} onClick={this.props.onClick}>0</button>
+            <button id="fifthSeat" value={[10, 85, 0, -10]} onClick={this.props.onClick}>10</button>
           </div>
           <div id="thirdRow">
             <button id="firstSeat" value={[11, 25, 0, -15]} onClick={this.props.onClick}>11</button>
@@ -47,7 +47,7 @@ class E220 extends Component {
             <button id="secondSeat" value={[27, 35, 0, -30]} onClick={this.props.onClick}>27</button>
             <button id="thirdSeat" value={[28, 55, 0, -30]} onClick={this.props.onClick}>28</button>
             <button id="fourthSeat" value={[29, 70, 0, -30]} onClick={this.props.onClick}>29</button>
-            <button id="fifthSeat" value={[30, 85, -30]} onClick={this.props.onClick}>30</button>
+            <button id="fifthSeat" value={[30, 85, 0, -30]} onClick={this.props.onClick}>30</button>
           </div>
         </div>
     );

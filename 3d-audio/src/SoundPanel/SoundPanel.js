@@ -56,33 +56,36 @@ function finishedLoading(bufferList) {
 	bufferArray = bufferList;
 
 	teacherSound.volume = context.createGain();
-	teacherSound.volume.value = -0.8
 	teacherSound.panner = context.createPanner();
 	teacherSound.volume.connect(teacherSound.panner);
 	teacherSound.panner.connect(context.destination);
 	
 	chalkboardSound.volume = context.createGain();
-	chalkboardSound.volume.value = 10;
+	chalkboardSound.volume.value = 50;
 	chalkboardSound.panner = context.createPanner();
 	chalkboardSound.volume.connect(chalkboardSound.panner);
 	chalkboardSound.panner.connect(context.destination);
 
 	sneezeSound.volume = context.createGain();
+	sneezeSound.volume.value=1;
 	sneezeSound.panner = context.createPanner();
 	sneezeSound.volume.connect(sneezeSound.panner);
 	sneezeSound.panner.connect(context.destination);
 
 	ahemSound.volume = context.createGain();
+	ahemSound.volume.value=1;
 	ahemSound.panner = context.createPanner();
 	ahemSound.volume.connect(ahemSound.panner);
 	ahemSound.panner.connect(context.destination);
 
 	laughSound.volume = context.createGain();
+	laughSound.volume.value=-10;
 	laughSound.panner = context.createPanner();
 	laughSound.volume.connect(laughSound.panner);
 	laughSound.panner.connect(context.destination);
 
 	constructionSound.volume = context.createGain();
+	constructionSound.volume.value = -1;
 	constructionSound.panner = context.createPanner();
 	constructionSound.volume.connect(constructionSound.panner);
 	constructionSound.panner.connect(context.destination);
@@ -103,15 +106,12 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 	if(teacherOn) {
 		// Create new source
 		var teacherSource = context.createBufferSource();
-		if(currentClassroom === "Carleton")
-			teacherSource.buffer = bufferArray[1];
-		else if(currentClassroom ==="E220")
-			teacherSource.buffer = bufferArray[0];
+		teacherSource.buffer = bufferArray[0];
 		teacherSource.connect(teacherSound.volume);
 
 		// Set position of sound
 		teacherX = teacherX-seatX;
-		teacherSound.panner.setPosition(teacherX,0, parseInt(seatZ));
+		teacherSound.panner.setPosition(teacherX/5,0, seatZ);
 
 		// Set source and play sound
 		teacherSound.source = teacherSource;
@@ -127,12 +127,12 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 		chalkboardSource.connect(chalkboardSound.volume);
 
 		// Set position of sound
-		var chalkboardX = -seatX;
-		chalkboardSound.panner.setPosition(chalkboardX,0, parseInt(seatZ));
+		var chalkboardX = (55-seatX);
+		chalkboardSound.panner.setPosition(chalkboardX,0, seatZ);
 
 		// Set source and play sound
 		chalkboardSound.source = chalkboardSource;
-		chalkboardSound.source.loop = true;
+		chalkboardSound.source.loop = false;
 		chalkboardSound.source.start(0);
 		activeSounds.push(chalkboardSound.source);
 	}
@@ -141,10 +141,11 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
   // 		// Create new source
   		var ahemSource = context.createBufferSource();
 		ahemSource.buffer = bufferArray[4];
-		ahemSource.connect(airCondSound.volume);
+		ahemSource.connect(ahemSound.volume);
 
 		// Set position of sound
-		ahemSound.panner.setPosition(-1,1,1);
+
+		ahemSound.panner.setPosition(seatX-50,0,-seatZ+100);
 
 		// Set source and play sound
 		ahemSound.source = ahemSource;
@@ -155,29 +156,29 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 		// // Create new source
   		var sneezeSource = context.createBufferSource();
 		sneezeSource.buffer = bufferArray[3];
-		sneezeSource.connect(airCondSound.volume);
+		sneezeSource.connect(sneezeSound.volume);
 
 		// Set position of sound
-		sneezeSound.panner.setPosition(-1,1,1);
+		sneezeSound.panner.setPosition(seatX-10,0,-seatZ+50);
 
 		// Set source and play sound
 		sneezeSound.source = sneezeSource;
 		// sneezeSound.source.loop = false;
-		sneezeSound.source.start(context.currentTime + 3,0,2);
+		sneezeSound.source.start(context.currentTime + 4,0,2);
   		activeSounds.push(sneezeSound.source);
 
 
   		// Create new source
   		var laughSource = context.createBufferSource();
 		laughSource.buffer = bufferArray[5];
-		laughSource.connect(airCondSound.volume);
+		laughSource.connect(laughSound.volume);
 
 		// Set position of sound
-		laughSound.panner.setPosition(-1,1,1);
+		laughSound.panner.setPosition(-1,0,-100);
 
 		// Set source and play sound
 		laughSound.source = laughSource;
-		laughSound.source.start(context.currentTime + 4,0,5);
+		laughSound.source.start(context.currentTime + 5,0,5);
   		activeSounds.push(laughSound.source);
 	}
 
@@ -188,7 +189,10 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 		constructionSource.connect(constructionSound.volume);
 
 		// Set position of sound
-		constructionSound.panner.setPosition(0,-20,0);
+		var constructionZ = (-seatZ*100)-5000;
+		var constructionX = 55-seatX;
+		constructionSound.panner.setPosition(constructionX,0,constructionZ);
+		constructionSound.volume.value = -100;
 
 		// Set source and play sound
 		constructionSound.source = constructionSource;
@@ -204,7 +208,9 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 		airCondSource.connect(airCondSound.volume);
 
 		// Set position of sound
-		airCondSound.panner.setPosition(0,0,20);
+		var airCondZ = -50-seatZ;
+		var airCondX = 100-seatX;
+		airCondSound.panner.setPosition(airCondX,0,airCondZ);
 
 		// Set source and play sound
 		airCondSound.source = airCondSource;
@@ -318,7 +324,7 @@ class SoundPanel extends Component {
 					<h1><u>SoundPanel</u></h1>
 					<ul id="configurables">
 						<li>
-							<h3 id="seatNum"><i>Seat No: {this.state.seatNumber}</i></h3>
+							<h3 id="seatNum"><i><strong>Seat No: {this.state.seatNumber}</strong></i></h3>
 						</li>
 						<li>
 							<h3>Professor Talking</h3>
@@ -394,9 +400,20 @@ class SoundPanel extends Component {
 	}
 	handleChange = (event) => {
 		if(event.target.value ==="Carleton")
-			this.setState({currentClassroom: <Carleton onClick={this.handleClick}/>, dropdownValue: "Carleton"});
+			this.setState({currentClassroom: <Carleton onClick={this.handleClick}/>, 
+							dropdownValue: "Carleton", 
+							seatX: 40, 
+							seatY: 0, 
+							seatZ: -5, 
+							seatNumber: 1, 
+							chalkboardNoise: false});
 		else if(event.target.value === "E220")
-			this.setState({currentClassroom: <E220 onClick={this.handleClick}/>, dropdownValue: "E220"});
+			this.setState({currentClassroom: <E220 onClick={this.handleClick}/>, 
+							dropdownValue: "E220", 
+							seatX: 25, 
+							seatY: 0, 
+							seatZ: -5, 
+							seatNumber: 1});
   	}
   	handleClick = (event) => {
   		var xCoord='';
