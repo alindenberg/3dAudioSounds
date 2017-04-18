@@ -14,7 +14,7 @@ class Carleton extends Component {
 		return (
 			<div id="Carleton">
 				<div id="carletonFirstRow">
-					<button id="carletonFirstSeat" value={[1,0,10,0]} onClick={this.props.onClick}>01</button>
+					<button id="carletonFirstSeat" value={[1,0,0,0]} onClick={this.props.onClick}>01</button>
 					<button id="carletonSecondSeat" value={[2,0,10,0]} onClick={this.props.onClick}>02</button>
 					<button id="carletonThirdSeat" value={[3,0,10,0]} onClick={this.props.onClick}>03</button>
 					<button id="carletonFourthSeat" value={[4,0,10,0]} onClick={this.props.onClick}>04</button>

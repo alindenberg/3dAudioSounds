@@ -11,9 +11,13 @@ var context;
 var bufferLoader;
 var bufferArray = [];
 
+// Initialize possible sound objects
 var teacherSound = {};
 var constructionSound = {};
+var airCondSound = {};
+var crowdSound = {};
 
+// Array to store sounds being played currently
 var activeSounds = [];
 
 function init() {
@@ -24,8 +28,10 @@ function init() {
   	bufferLoader = new BufferLoader(
 	    context,
 	    [
-	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/sounds/ahem.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/Professor%20(Bush).wav',
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/sounds/construction.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/Air%20conditioner.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/wilhelm.wav'
 	    ],
 	    finishedLoading
    	);
@@ -41,25 +47,29 @@ function finishedLoading(bufferList) {
 	teacherSound.volume.connect(teacherSound.panner);
 	teacherSound.panner.connect(context.destination);
 	
-	// var teacherSource = context.createBufferSource();
-	// teacherSource.buffer = bufferList[0];
-	// teacherSource.connect(teacherSound.volume);
-	// teacherSound.source = teacherSource;
-
 	constructionSound.volume = context.createGain();
 	constructionSound.panner = context.createPanner();
 	constructionSound.volume.connect(constructionSound.panner);
 	constructionSound.panner.connect(context.destination);
+
+	airCondSound.volume = context.createGain();
+	airCondSound.panner = context.createPanner();
+	airCondSound.volume.connect(airCondSound.panner);
+	airCondSound.panner.connect(context.destination);
+
+	crowdSound.volume = context.createGain();
+	crowdSound.panner = context.createPanner();
+	crowdSound.volume.connect(crowdSound.panner);
+	crowdSound.panner.connect(context.destination);
 	
 }
 
-function playSounds(teacherOn, tsX, tsY, tsZ, constructionOn) {
+function playSounds(teacherOn, teacherX, seatX, seatY, seatZ, constructionOn, airCondOn, crowdOn) {
+	// Stop any sounds currently playing
+	stopSounds();
 
-	// teacherSound.panner.setPosition(x, y, z);
-	console.log(teacherOn);
-	console.log(constructionOn);
 	// THIS WILL BE SEAT LOCATION
-  	context.listener.setPosition(20, 15, 15);
+  	context.listener.setPosition(seatX, seatY, seatZ);
 
 	if(teacherOn) {
 		// Create new source
@@ -68,7 +78,7 @@ function playSounds(teacherOn, tsX, tsY, tsZ, constructionOn) {
 		teacherSource.connect(teacherSound.volume);
 
 		// Set position of sound
-		teacherSound.panner.setPosition(tsX,tsY, tsZ);
+		teacherSound.panner.setPosition(teacherX,0, 0);
 
 		// Set source and play sound
 		teacherSound.source = teacherSource;
@@ -83,13 +93,45 @@ function playSounds(teacherOn, tsX, tsY, tsZ, constructionOn) {
 		constructionSource.connect(constructionSound.volume);
 
 		// Set position of sound
-		constructionSound.panner.setPosition(0,0,10);
+		constructionSound.panner.setPosition(0,-20,0);
 
 		// Set source and play sound
 		constructionSound.source = constructionSource;
 		constructionSound.source.loop = true;
 		constructionSound.source.start(0);
   		activeSounds.push(constructionSound.source);
+	}
+
+	if(airCondOn) {
+		// Create new source
+  		var airCondSource = context.createBufferSource();
+		airCondSource.buffer = bufferArray[2];
+		airCondSource.connect(airCondSound.volume);
+
+		// Set position of sound
+		airCondSound.panner.setPosition(0,0,20);
+
+		// Set source and play sound
+		airCondSound.source = airCondSource;
+		airCondSound.source.loop = true;
+		airCondSound.source.start(0);
+  		activeSounds.push(airCondSound.source);
+	}
+
+	if(crowdOn) {
+		// Create new source
+  		var crowdSource = context.createBufferSource();
+		crowdSource.buffer = bufferArray[3];
+		crowdSource.connect(airCondSound.volume);
+
+		// Set position of sound
+		crowdSound.panner.setPosition(0,0,10);
+
+		// Set source and play sound
+		crowdSound.source = crowdSource;
+		crowdSound.source.loop = true;
+		crowdSound.source.start(0);
+  		activeSounds.push(crowdSound.source);
 	}
 }
 
@@ -157,10 +199,9 @@ class SoundPanel extends Component {
 			professorTalking:false,
 			professorLocation: 0,
 			constructionSound: false,
-			studentSittingNearby: false,
+			crowdNoise: false,
 			airConditioningOn: false,
 			nearbyChatter: false,
-			distantChatter: false,
 			seatX: 0,
 			seatY: 0,
 			seatZ: 0,
@@ -194,7 +235,7 @@ class SoundPanel extends Component {
 						</li>
 						<li>
 							<h3>Professor Talking</h3>
-							<ToggleButton 
+							<ToggleButton disabled={this.state.dropdownValue === "E220"}
 								value={ this.state.professorTalking || false } onToggle={
 									(value) => {
 								    	this.setState({professorTalking: !value,});
@@ -203,11 +244,11 @@ class SoundPanel extends Component {
 							ToggleButton/>
 						</li>
 						<li>
-							<h3>Distant Chatter</h3>
+							<h3>Classroom Chatter</h3>
 							<ToggleButton 
-								value={ this.state.distantChatter || false } onToggle={
+								value={ this.state.crowdNoise || false } onToggle={
 									(value) => {
-								    	this.setState({distantChatter: !value,});
+								    	this.setState({crowdNoise: !value,});
 								  	}
 							 	}
 							ToggleButton/>
@@ -239,10 +280,15 @@ class SoundPanel extends Component {
 					</ul>
 					<div id="playSound">
 						<button id="playButton" onClick={()=>playSounds(this.state.professorTalking, 
-																		this.state.seatX, this.state.seatY, this.state.seatZ, 
-																		this.state.constructionSound)}>Play sounds</button>
+																		this.state.professorLocation, 
+																		this.state.seatX,
+																		this.state.seatY,
+																		this.state.seatZ,
+																		this.state.constructionSound,
+																		this.state.airConditioningOn,
+																		this.state.crowdNoise)}>Play sounds</button>
 					</div>
-					<div id="stopSound">
+					<div id="playSound">
 						<button id="playButton" onClick={()=>stopSounds()}>Stop sounds</button>
 					</div>
 				</div>
