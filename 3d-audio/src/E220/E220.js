@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import 'rc-slider/assets/index.css';
+import Slider from 'rc-slider/assets/index.css';
+
 import './E220.css';
 
 class E220 extends Component {

@@ -132,7 +132,7 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 
 		// Set source and play sound
 		chalkboardSound.source = chalkboardSource;
-		chalkboardSound.source.loop = false;
+		chalkboardSound.source.loop = true;
 		chalkboardSound.source.start(0);
 		activeSounds.push(chalkboardSound.source);
 	}
@@ -150,7 +150,7 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 		// Set source and play sound
 		ahemSound.source = ahemSource;
 		ahemSound.source.loop = false;
-		ahemSound.source.start(context.currentTime + 2,0,2);
+		ahemSound.source.start(context.currentTime + 2,0,1);
   		activeSounds.push(ahemSound.source);
 
 		// // Create new source
@@ -163,8 +163,8 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 
 		// Set source and play sound
 		sneezeSound.source = sneezeSource;
-		// sneezeSound.source.loop = false;
-		sneezeSound.source.start(context.currentTime + 4,0,2);
+		sneezeSound.source.loop = false;
+		sneezeSound.source.start(context.currentTime + 4,0,1);
   		activeSounds.push(sneezeSound.source);
 
 
@@ -178,7 +178,8 @@ function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, 
 
 		// Set source and play sound
 		laughSound.source = laughSource;
-		laughSound.source.start(context.currentTime + 5,0,5);
+		sneezeSound.source.loop = false;
+		laughSound.source.start(context.currentTime + 5,0,2);
   		activeSounds.push(laughSound.source);
 	}
 
