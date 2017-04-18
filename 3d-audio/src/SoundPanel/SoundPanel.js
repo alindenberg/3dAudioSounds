@@ -31,6 +31,7 @@ function init() {
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/Professor%20(Bush).wav',
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/construction.wav',
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/chalkboard.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/highCeilingLecture.wav',
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/Air%20conditioner.wav',
 
 	    ],
