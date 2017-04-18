@@ -1,5 +1,5 @@
 #configurables {
-	padding-top: 2%;
+	/*padding-top: %;*/
 }
 
 #soundPanel {
@@ -9,16 +9,18 @@
 }
 
 #classroom {
-	width:68vw;
+	width:69vw;
 	text-align: center;
+	background-color: #0066ff;
 	height:90vh;
 	float: left;
 	border: 3px solid black;
 }
 
 #seatNum{
-	padding-bottom: 5%;
-	color: red;
+	padding-bottom: 2%;
+	color: black;
+	font-size: 24px;
 }
 
 #navbar {
@@ -32,6 +34,10 @@
 
 #teacherDiv {
 	padding-top: 2%;
+	width: 68vw;
+}
+#teacherPosition {
+	margin-left: 10%;
 }
 
 #playButton {

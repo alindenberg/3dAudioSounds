@@ -14,8 +14,11 @@ var bufferArray = [];
 // Initialize possible sound objects
 var teacherSound = {};
 var constructionSound = {};
+var chalkboardSound = {};
 var airCondSound = {};
-var crowdSound = {};
+var sneezeSound = {};
+var ahemSound = {};
+var laughSound = {};
 
 // Array to store sounds being played currently
 var activeSounds = [];
@@ -28,11 +31,19 @@ function init() {
   	bufferLoader = new BufferLoader(
 	    context,
 	    [
+	    // Lectures
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/Professor%20(Bush).wav',
-	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/construction.wav',
-	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/chalkboard.wav',
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/highCeilingLecture.wav',
+	      // Chalkboard
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/chalkboard.wav',
+	      // Random classroom noises (Sneeze, Ahem, & laugh)
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/sneeze.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/austinBranch/3d-audio/src/SoundPanel/sounds/ahem.wav',
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/laughCrowd.wav',
+	      // Air conditioner
 	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/Air%20conditioner.wav',
+	      // Construction
+	      'https://raw.githubusercontent.com/alindenberg/3dAudioSounds/master/3d-audio/src/SoundPanel/sounds/construction.wav',
 
 	    ],
 	    finishedLoading
@@ -49,7 +60,32 @@ function finishedLoading(bufferList) {
 	teacherSound.volume.connect(teacherSound.panner);
 	teacherSound.panner.connect(context.destination);
 	
+	chalkboardSound.volume = context.createGain();
+	chalkboardSound.volume.value = 50;
+	chalkboardSound.panner = context.createPanner();
+	chalkboardSound.volume.connect(chalkboardSound.panner);
+	chalkboardSound.panner.connect(context.destination);
+
+	sneezeSound.volume = context.createGain();
+	sneezeSound.volume.value=1;
+	sneezeSound.panner = context.createPanner();
+	sneezeSound.volume.connect(sneezeSound.panner);
+	sneezeSound.panner.connect(context.destination);
+
+	ahemSound.volume = context.createGain();
+	ahemSound.volume.value=1;
+	ahemSound.panner = context.createPanner();
+	ahemSound.volume.connect(ahemSound.panner);
+	ahemSound.panner.connect(context.destination);
+
+	laughSound.volume = context.createGain();
+	laughSound.volume.value=-10;
+	laughSound.panner = context.createPanner();
+	laughSound.volume.connect(laughSound.panner);
+	laughSound.panner.connect(context.destination);
+
 	constructionSound.volume = context.createGain();
+	constructionSound.volume.value = -1;
 	constructionSound.panner = context.createPanner();
 	constructionSound.volume.connect(constructionSound.panner);
 	constructionSound.panner.connect(context.destination);
@@ -57,21 +93,15 @@ function finishedLoading(bufferList) {
 	airCondSound.volume = context.createGain();
 	airCondSound.panner = context.createPanner();
 	airCondSound.volume.connect(airCondSound.panner);
-	airCondSound.panner.connect(context.destination);
-
-	crowdSound.volume = context.createGain();
-	crowdSound.panner = context.createPanner();
-	crowdSound.volume.connect(crowdSound.panner);
-	crowdSound.panner.connect(context.destination);
-	
+	airCondSound.panner.connect(context.destination);	
 }
 
-function playSounds(teacherOn, teacherX, seatX, seatY, seatZ, constructionOn, airCondOn, crowdOn) {
+function playSounds(currentClassroom, teacherOn, teacherX, chalkboardOn, seatX, seatY, seatZ, crowdOn, constructionOn, airCondOn) {
 	// Stop any sounds currently playing
 	stopSounds();
 
 	// THIS WILL BE SEAT LOCATION
-  	context.listener.setPosition(seatX, seatY, seatZ);
+  	// context.listener.setPosition(0, 0, 0);
 
 	if(teacherOn) {
 		// Create new source
@@ -80,7 +110,8 @@ function playSounds(teacherOn, teacherX, seatX, seatY, seatZ, constructionOn, ai
 		teacherSource.connect(teacherSound.volume);
 
 		// Set position of sound
-		teacherSound.panner.setPosition(teacherX,0, 0);
+		teacherX = teacherX-seatX;
+		teacherSound.panner.setPosition(teacherX/5,0, seatZ);
 
 		// Set source and play sound
 		teacherSound.source = teacherSource;
@@ -88,14 +119,80 @@ function playSounds(teacherOn, teacherX, seatX, seatY, seatZ, constructionOn, ai
 		teacherSound.source.start(0);
 		activeSounds.push(teacherSound.source);
 	}
+
+	if(chalkboardOn) {
+		// Create new source
+		var chalkboardSource = context.createBufferSource();
+		chalkboardSource.buffer = bufferArray[2];
+		chalkboardSource.connect(chalkboardSound.volume);
+
+		// Set position of sound
+		var chalkboardX = (55-seatX);
+		chalkboardSound.panner.setPosition(chalkboardX,0, seatZ);
+
+		// Set source and play sound
+		chalkboardSound.source = chalkboardSource;
+		chalkboardSound.source.loop = false;
+		chalkboardSound.source.start(0);
+		activeSounds.push(chalkboardSound.source);
+	}
+
+	if(crowdOn) {
+  // 		// Create new source
+  		var ahemSource = context.createBufferSource();
+		ahemSource.buffer = bufferArray[4];
+		ahemSource.connect(ahemSound.volume);
+
+		// Set position of sound
+
+		ahemSound.panner.setPosition(seatX-50,0,-seatZ+100);
+
+		// Set source and play sound
+		ahemSound.source = ahemSource;
+		ahemSound.source.loop = false;
+		ahemSound.source.start(context.currentTime + 2,0,2);
+  		activeSounds.push(ahemSound.source);
+
+		// // Create new source
+  		var sneezeSource = context.createBufferSource();
+		sneezeSource.buffer = bufferArray[3];
+		sneezeSource.connect(sneezeSound.volume);
+
+		// Set position of sound
+		sneezeSound.panner.setPosition(seatX-10,0,-seatZ+50);
+
+		// Set source and play sound
+		sneezeSound.source = sneezeSource;
+		// sneezeSound.source.loop = false;
+		sneezeSound.source.start(context.currentTime + 4,0,2);
+  		activeSounds.push(sneezeSound.source);
+
+
+  		// Create new source
+  		var laughSource = context.createBufferSource();
+		laughSource.buffer = bufferArray[5];
+		laughSource.connect(laughSound.volume);
+
+		// Set position of sound
+		laughSound.panner.setPosition(-1,0,-100);
+
+		// Set source and play sound
+		laughSound.source = laughSource;
+		laughSound.source.start(context.currentTime + 5,0,5);
+  		activeSounds.push(laughSound.source);
+	}
+
 	if(constructionOn) {
 		// Create new source
   		var constructionSource = context.createBufferSource();
-		constructionSource.buffer = bufferArray[1];
+		constructionSource.buffer = bufferArray[7];
 		constructionSource.connect(constructionSound.volume);
 
 		// Set position of sound
-		constructionSound.panner.setPosition(0,-20,0);
+		var constructionZ = (-seatZ*100)-5000;
+		var constructionX = 55-seatX;
+		constructionSound.panner.setPosition(constructionX,0,constructionZ);
+		constructionSound.volume.value = -100;
 
 		// Set source and play sound
 		constructionSound.source = constructionSource;
@@ -107,33 +204,19 @@ function playSounds(teacherOn, teacherX, seatX, seatY, seatZ, constructionOn, ai
 	if(airCondOn) {
 		// Create new source
   		var airCondSource = context.createBufferSource();
-		airCondSource.buffer = bufferArray[2];
+		airCondSource.buffer = bufferArray[6];
 		airCondSource.connect(airCondSound.volume);
 
 		// Set position of sound
-		airCondSound.panner.setPosition(0,0,20);
+		var airCondZ = -50-seatZ;
+		var airCondX = 100-seatX;
+		airCondSound.panner.setPosition(airCondX,0,airCondZ);
 
 		// Set source and play sound
 		airCondSound.source = airCondSource;
 		airCondSound.source.loop = true;
 		airCondSound.source.start(0);
   		activeSounds.push(airCondSound.source);
-	}
-
-	if(crowdOn) {
-		// Create new source
-  		var crowdSource = context.createBufferSource();
-		crowdSource.buffer = bufferArray[3];
-		crowdSource.connect(airCondSound.volume);
-
-		// Set position of sound
-		crowdSound.panner.setPosition(0,0,10);
-
-		// Set source and play sound
-		crowdSound.source = crowdSource;
-		crowdSound.source.loop = true;
-		crowdSound.source.start(0);
-  		activeSounds.push(crowdSound.source);
 	}
 }
 
@@ -199,18 +282,18 @@ class SoundPanel extends Component {
 		super(props);
 		this.state = {
 			professorTalking:false,
-			professorLocation: 0,
+			professorLocation: 55,
 			constructionSound: false,
 			crowdNoise: false,
 			chalkboardNoise: false,
 			airConditioningOn: false,
 			nearbyChatter: false,
-			seatX: 0,
+			seatX: 25,
 			seatY: 0,
-			seatZ: 0,
+			seatZ: -10,
 			seatNumber: 1,
-			currentClassroom: <Carleton onClick={this.handleClick}/>,
-			dropdownValue: "Carleton",
+			currentClassroom: <E220 onClick={this.handleClick}/>,
+			dropdownValue: "E220",
 		};
 	}
 	render() {
@@ -219,14 +302,21 @@ class SoundPanel extends Component {
     			<div id="navbar">
 					<span>Classroom: </span>
 					<select value={this.state.dropdownValue} onChange={this.handleChange}>
-						<option value="Carleton">Carleton</option>
 						<option value="E220">E220</option>
+						<option value="Carleton">Carleton</option>
 					</select>
 				</div>
 				<div id ="classroom">
 					<div id="teacherDiv">
-						<Slider defaultValue='55' id="teacherPosition"></Slider>
 						<h3>Professor Position</h3>
+						<div id="teacherPosition">
+							<Slider defaultValue={this.state.professorLocation} 
+								onChange={
+									(value) => { 
+										this.setState({professorLocation: value})
+									}
+								}></Slider>
+						</div>
 					</div>
 					{this.state.currentClassroom}
 				</div>
@@ -234,7 +324,7 @@ class SoundPanel extends Component {
 					<h1><u>SoundPanel</u></h1>
 					<ul id="configurables">
 						<li>
-							<h3 id="seatNum"><i>Seat No: {this.state.seatNumber}</i></h3>
+							<h3 id="seatNum"><i><strong>Seat No: {this.state.seatNumber}</strong></i></h3>
 						</li>
 						<li>
 							<h3>Professor Talking</h3>
@@ -290,14 +380,16 @@ class SoundPanel extends Component {
 						</li>
 					</ul>
 					<div id="playSound">
-						<button id="playButton" onClick={()=>playSounds(this.state.professorTalking, 
+						<button id="playButton" onClick={()=>playSounds(this.state.dropdownValue,
+																		this.state.professorTalking, 
 																		this.state.professorLocation, 
+																		this.state.chalkboardNoise,
 																		this.state.seatX,
 																		this.state.seatY,
 																		this.state.seatZ,
+																		this.state.crowdNoise,
 																		this.state.constructionSound,
-																		this.state.airConditioningOn,
-																		this.state.crowdNoise)}>Play sounds</button>
+																		this.state.airConditioningOn)}>Play sounds</button>
 					</div>
 					<div id="playSound">
 						<button id="playButton" onClick={()=>stopSounds()}>Stop sounds</button>
@@ -308,9 +400,20 @@ class SoundPanel extends Component {
 	}
 	handleChange = (event) => {
 		if(event.target.value ==="Carleton")
-			this.setState({currentClassroom: <Carleton onClick={this.handleClick}/>, dropdownValue: "Carleton"});
+			this.setState({currentClassroom: <Carleton onClick={this.handleClick}/>, 
+							dropdownValue: "Carleton", 
+							seatX: 40, 
+							seatY: 0, 
+							seatZ: -5, 
+							seatNumber: 1, 
+							chalkboardNoise: false});
 		else if(event.target.value === "E220")
-			this.setState({currentClassroom: <E220 onClick={this.handleClick}/>, dropdownValue: "E220"});
+			this.setState({currentClassroom: <E220 onClick={this.handleClick}/>, 
+							dropdownValue: "E220", 
+							seatX: 25, 
+							seatY: 0, 
+							seatZ: -5, 
+							seatNumber: 1});
   	}
   	handleClick = (event) => {
   		var xCoord='';
