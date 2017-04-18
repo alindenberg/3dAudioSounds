@@ -32,6 +32,10 @@
 
 #teacherDiv {
 	padding-top: 2%;
+	width: 68vw;
+}
+#teacherPosition {
+	margin-left: 10%;
 }
 
 #playButton {
